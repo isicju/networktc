@@ -20,14 +20,14 @@ public class DemoApplication {
 //                .createNetworkCmdModifier(cmd -> cmd.withAttachable(true))
 //                .build();
         try {
-            GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"))
-                    .withNetworkMode("host");
+            GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"));
+//                    .withNetworkMode("host");
 //                    .withExposedPorts(80);
 
             nginx.setPortBindings(List.of("7676:80"));
 
             GenericContainer<?> ubuntu = new GenericContainer<>(DockerImageName.parse("ubuntu:latest"))
-                    .withNetworkMode("host")
+//                    .withNetworkMode("host")
                             .withCommand("tail", "-f", "/dev/null");
 
             nginx.start();
