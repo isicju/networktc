@@ -6,6 +6,7 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -20,14 +21,17 @@ public class DemoApplication {
 //                .createNetworkCmdModifier(cmd -> cmd.withAttachable(true))
 //                .build();
         try {
-            GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"));
-//                    .withNetworkMode("host");
-//                    .withExposedPorts(80);
+            GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"))
+                    .withNetworkMode("host")
+                    .withEnv("NGINX_PORT", "8081");
 
-            nginx.setPortBindings(List.of("7676:80"));
+//            nginx.setPortBindings(Arrays.asList("8081:80"));
+
+
+//            nginx.setPortBindings(List.of("7676:80"));
 
             GenericContainer<?> ubuntu = new GenericContainer<>(DockerImageName.parse("ubuntu:latest"))
-//                    .withNetworkMode("host")
+                    .withNetworkMode("host")
                             .withCommand("tail", "-f", "/dev/null");
 
             nginx.start();
