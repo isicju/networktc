@@ -1,0 +1,70 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.2'
+	id 'io.spring.dependency-management' version '1.1.6'
+}
+
+group = 'com.test.embeddedpostgres'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(21)
+	}
+}
+ext {
+	postgresVersion = '42.1.1'
+	pgEmbeddedVersion = '0.7.1'
+}
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	implementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
+	implementation 'org.junit.jupiter:junit-jupiter-engine:5.10.0'
+
+	implementation 'org.testcontainers:testcontainers:1.19.0'
+	implementation 'org.testcontainers:junit-jupiter:1.19.0'
+
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+//	compileOnly 'org.projectlombok:lombok'
+//	runtimeOnly 'org.postgresql:postgresql'
+	annotationProcessor 'org.projectlombok:lombok'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+//	testImplementation 'com.opentable:embedded-postgres:0.13.0'
+//	testImplementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+//	testImplementation 'org.postgresql:postgresql:42.6.0' // Check for the latest version
+//	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+//	testImplementation 'com.wix:embedded-postgres:0.8.0' // Check for the latest version
+//	testImplementation 'com.opentable.components:otj-pg-embedded:0.7.1'
+	implementation 'org.postgresql:postgresql:42.1.1'
+//	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
+}
+
+tasks.named('bootRun') {
+	// Set JVM arguments
+	jvmArgs = ['-Dspring.profiles.active=dev']
+
+	// Customize the classpath if necessary
+	classpath = sourceSets.main.runtimeClasspath
+
+	// Set environment variables if needed
+	environment 'ENV_VAR_NAME', 'value'
+
+	// Enable live reload if needed
+	systemProperty 'spring.devtools.restart.enabled', 'true'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+}
