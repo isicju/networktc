@@ -21,8 +21,8 @@ public class DemoApplication {
 //                .build();
         try {
             GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"))
-                    .withNetworkMode("host")
-                    .withExposedPorts(80);
+                    .withNetworkMode("host");
+//                    .withExposedPorts(80);
 
             nginx.setPortBindings(List.of("7676:80"));
 
