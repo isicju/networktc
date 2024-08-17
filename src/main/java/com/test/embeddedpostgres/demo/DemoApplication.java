@@ -15,16 +15,16 @@ public class DemoApplication {
     public static void main(String[] args) {
         System.out.println("starting");
         SpringApplication.run(DemoApplication.class, args);
-        Network overlayNetwork = Network.builder()
-                .driver("overlay")
-                .createNetworkCmdModifier(cmd -> cmd.withAttachable(true))
-                .build();
+//        Network overlayNetwork = Network.builder()
+//                .driver("overlay")
+//                .createNetworkCmdModifier(cmd -> cmd.withAttachable(true))
+//                .build();
         try {
             GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"))
                     .withNetworkMode("host")
                     .withExposedPorts(80);
 
-            nginx.setPortBindings(List.of("80:80"));
+            nginx.setPortBindings(List.of("7676:80"));
 
             GenericContainer<?> ubuntu = new GenericContainer<>(DockerImageName.parse("ubuntu:latest"))
                     .withNetworkMode("host")
