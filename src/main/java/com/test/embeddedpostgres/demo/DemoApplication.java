@@ -6,13 +6,6 @@ import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.Network;
 import org.testcontainers.utility.DockerImageName;
 
-import java.util.Optional;
-
-
-import org.testcontainers.containers.GenericContainer;
-import org.testcontainers.containers.Network;
-import org.testcontainers.utility.DockerImageName;
-
 @SpringBootApplication
 public class DemoApplication {
 
