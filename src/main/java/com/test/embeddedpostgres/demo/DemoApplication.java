@@ -21,13 +21,13 @@ public class DemoApplication {
                 .build();
         try {
             GenericContainer<?> nginx = new GenericContainer<>(DockerImageName.parse("nginx:latest"))
-                    .withNetwork(overlayNetwork)
+                    .withNetworkMode("host")
                     .withExposedPorts(80);
 
             nginx.setPortBindings(List.of("80:80"));
 
             GenericContainer<?> ubuntu = new GenericContainer<>(DockerImageName.parse("ubuntu:latest"))
-                    .withNetwork(overlayNetwork)
+                    .withNetworkMode("host")
                             .withCommand("tail", "-f", "/dev/null");
 
             nginx.start();
