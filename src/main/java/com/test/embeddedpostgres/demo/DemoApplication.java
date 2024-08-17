@@ -27,7 +27,8 @@ public class DemoApplication {
             nginx.setPortBindings(List.of("80:80"));
 
             GenericContainer<?> ubuntu = new GenericContainer<>(DockerImageName.parse("ubuntu:latest"))
-                    .withNetwork(overlayNetwork);
+                    .withNetwork(overlayNetwork)
+                            .withCommand("tail", "-f", "/dev/null");
 
             nginx.start();
             ubuntu.start();
